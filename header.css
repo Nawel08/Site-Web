@@ -1,0 +1,120 @@
+/* GENERALITES */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  font-size:62.5%;
+ 
+}
+
+body{
+  background-color:#0C0456;
+  color:white;
+}
+
+/*NAVIGATION */
+nav ul{
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin-right: 30px;
+}
+
+nav li {
+  margin-right: 25px;
+}
+nav li:hover{
+	transform: scale(1.05); /* aggrandissement de 5%*/
+	
+}
+.compte{
+	display: inline-block;
+  width:140px;
+  height:47px;
+  font-weight:bold;
+  font-size:15px;
+  
+  
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
+nav a{
+  color:#ffffff;
+  text-decoration:none;
+}
+
+nav{
+  min-height:10vh;
+  display:flex;
+  align-items:center;
+  width:100%;
+  margin:auto;
+  background-color:#F0F8FF;
+  padding:2rem; /*taille de la baniere*/
+}
+
+/* HEADER */
+header li a{
+  display:block;
+}
+
+li a {
+  color:black;
+  font-size:20px;
+}
+
+.sub-menu{
+  display:none;
+  position:absolute;
+  width:100px;
+}
+
+.sub-menu li{
+  display:block;
+}
+
+.sub-menu:hover{
+  font-weight:bold;
+  color:black;
+}
+
+header li{
+  position:relative;
+  vertical-align:top;
+}
+
+header li:hover .sub-menu{
+  display:block;
+}
+
+/*BANNIERE*/
+#logo{
+  flex:2 1 40rem;
+  margin-left:25px;
+}
+
+.search{
+  display:flex;
+  align-items:center;
+  margin-right:10px;
+}
+
+.search input{
+  width:300px;
+  border: 2px solid black;
+  padding:10px;
+  border-radius:30px;
+}
+
+.search i{
+  position:absolute;
+  margin-left:270px;
+}
+
