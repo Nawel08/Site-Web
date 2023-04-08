@@ -1,0 +1,61 @@
+/*Cette page correspond au code CSS de notre page footer.html
+*/
+ 
+/* On sélectionne les éléments avec la classe foot */
+.foot {
+	background-color: #F0F8FF; /* Couleur d'arrière-plan */
+	color: white; /* Couleur du texte */
+	display: grid; /* Affichage en grille */
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Modèle de colonnes de la grille */
+	grid-gap: 30px; /* Espacement entre les éléments de la grille */
+}
+
+/* On sélectionne les li */
+li {
+	margin-left: 450px; /* Marge à gauche */
+	margin: 0; /* Réinitialiser toutes les marges */
+	color: #0C0456; /* Couleur du texte */
+	text-decoration: none; /* Pas de décoration de texte */
+	font-size: 19px; /* Taille de police */
+}
+
+/* On sélectionne les ul */
+ul {
+	list-style-type: none; /* Supprimer les puces de liste */
+	padding: 0; /* Réinitialiser la marge intérieure */
+	margin: 0; /* Réinitialiser toutes les marges */
+	text-align: left; /* Alignement du texte à gauche */
+	margin-left: 130px; /* Marge à gauche */
+}
+
+/* On sélectionne les a */
+a {
+	text-decoration: none; /* Pas de décoration de texte */
+	color: #0C0456; /* Couleur du texte */
+}
+
+/* On sélectionne les div qui appartiennent à la classe footer */
+.foot div {
+	text-align: center; /* Alignement du texte au centre */
+	padding: 10px 0; /* Rembourrage */
+}
+
+/* On sélectionne les h3 qui appartiennent à la classe footer */
+.foot h3 {
+	font-size: 20px; /* Taille de police */
+	margin-bottom: 20px; /* Marge inférieure */
+	margin-left: 60px; /* Marge à gauche */
+	color: black; /* Couleur du texte */
+}
+
+/* On sélectionne la classe social-link */
+.social-link {
+	display: flex; /* Affichage en flex */
+	color: #0C0456; /* Couleur du texte */
+	align-items: center; /* Centrage vertical */
+}
+
+/* On sélectionne les image qui appartiennent à la classe social-link */
+.social-link img {
+	margin-right: 10px; /* Marge à droite */
+}
