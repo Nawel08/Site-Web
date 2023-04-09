@@ -12,11 +12,13 @@
 
 /* On sélectionne les li */
 li {
-	margin-left: 450px; /* Marge à gauche */
+	margin-left: 50px; /* Marge à gauche */
 	margin: 0; /* Réinitialiser toutes les marges */
 	color: #0C0456; /* Couleur du texte */
 	text-decoration: none; /* Pas de décoration de texte */
-	font-size: 19px; /* Taille de police */
+	font-size: 14px; /* Taille de police */
+	margin-left: 50px; /* Marge à gauche */
+	
 }
 
 /* On sélectionne les ul */
@@ -25,7 +27,7 @@ ul {
 	padding: 0; /* Réinitialiser la marge intérieure */
 	margin: 0; /* Réinitialiser toutes les marges */
 	text-align: left; /* Alignement du texte à gauche */
-	margin-left: 130px; /* Marge à gauche */
+	margin-left: 90px; /* Marge à gauche */
 }
 
 /* On sélectionne les a */
@@ -42,7 +44,7 @@ a {
 
 /* On sélectionne les h3 qui appartiennent à la classe footer */
 .foot h3 {
-	font-size: 20px; /* Taille de police */
+	font-size: 16px; /* Taille de police */
 	margin-bottom: 20px; /* Marge inférieure */
 	margin-left: 60px; /* Marge à gauche */
 	color: black; /* Couleur du texte */
