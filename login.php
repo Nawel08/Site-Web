@@ -1,3 +1,25 @@
+//utilisation de host=127.0.1 car plus rapide 
+if (isset($_POST['formconnexion'])){
+$mailconnect=htmlspecialchars($_POST['username']); //je récupère la variable de mon formulaire
+$mdpconnect=sha1($_POST['password']); //même type d'encodage que dans l'inscription mon compte pour pouvoir reconnaitre le mot de passe
+$requser=$DB->prepare("SELECT * FROM utilisateur WHERE mail=? AND password=?"); //requete sql qui récu^ère tous les noms d'utilisateur et les mots de passes
+$requser->execute(array($mailconnect,$mdpconnect)); //on execute la requete sql avec nos variables initialisé plus haut
+$userexist= $requser->rowCount(); //nous permet de compter le nombre de colonne qui existe avec les info de l'utilisateur
+if($userexist==1){ //si le mail et le mdp existe dans la base de donnée
+	$userinfo=$requser->fetch(); //pour recevoir les informations
+	$_SESSION['mail']=$userinfo['mail'];
+	echo $_SESSION['mail'];
+	$_SESSION['prenom']=$userinfo['prenom'];
+	header("Location: moncompte.php?mail=".$_SESSION['mail']); //pour renvoyer vers le profil de la personne qui se connecte
+}
+else{
+	$erreur="Mauvais mail ou mot de passe";
+	
+}
+}
+?>
+ <!DOCTYPE html>
+
 <html>
  <head>
 
@@ -6,72 +28,12 @@
  
  <link rel="stylesheet" href="login.css" media="screen" type="text/css" />
  </head>
- <!DOCTYPE html>
-<html>
-<head>
-<html>
-	<head>
-		<meta charset="utf-8">
-	    <title>N&T SCHOOL</title>
-	    <link rel="stylesheet" type="text/css" href="accueil.css">
-	</head>
-	
-	<body>
-	<!-- Création banière-->
-	<header class="main-head">
-	<nav>
-	<a href="accueil.html"><img src="logo2.png" alt="" id="logo"></a>
-	<!--Création d'un menu déroulant-->
-		<ul>
-			<li class="lien" >
-			<a class="lien_haut" href="#">Mathématiques</a>
-			<ul class="sub-menu">
-			<li class="lien">
-			<br>
-			<a href="#" title="terminale">Terminale</a>
-			</li>
-			<li class="lien">
-			<a href="#" title="premiere">Première</a>
-			</li>
-			<li class="lien">
-			<a href="#" title="seconde">Seconde</a>
-			</li>
-			<li class="lien">
-			<a href="BD_Projet_PageMaths.html" title="troisieme">Troisième</a>
-			</li>
-			</ul>
-			</li>
-			
-			<li class="lien" >
-			<a class="lien_haut" href="informatique.html">Informatique</a>
-			<ul class="sub-menu">
-			<li class="lien">
-			<br>
-			<a href="BD_Projet_PageInfo.html" title="terminale">Terminale</a>
-			</li>
-			<li class="BD_Projet_PageInfo.html">
-			<a href="#" title="premiere">Première</a>
-			</li>
-			<li class="lien">
-			<a href="#" title="seconde">Seconde</a>
-			</li>
-			<li class="lien">
-			<a href="#" title="troisieme">Troisième</a>
-			</li>
-			</ul>
-			</li>
-			
-			<li class="lien"><a  class="lien_haut"href="BD_Projet_Inscription.html">Inscription</a></li>
-			<li class="lien"><a  class="lien_haut" href="panier.php">Panier</a></li>
-			<li class="lien"><a  class="lien_haut" href="login.php">Connexion</a></li>
-		</ul>
-	</nav>
-	</header>
- <body>
+<body>
+<?php require("header.html");
+?>
  <div id="container">
- <!-- zone de connexion -->
- 
- <form action="verification.php" method="POST">
+
+ <form action="" method="POST"> 
  <h1>Connexion</h1>
  
  <label><b>Nom d'utilisateur</b></label>
@@ -80,7 +42,7 @@
  <label><b>Mot de passe</b></label>
  <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
- <input type="submit" id='submit' value='LOGIN' >
+ <input type="submit" id='submit' value='LOGIN' name="formconnexion" >
  <br>
  <br>
  <br>
@@ -89,11 +51,10 @@
  Nouvel utilisateur? <a class="lien_haut" href="BD_Projet_Inscription.html">Inscription </a>
  <br>
 Des difficultés pour vous connecter ? <a class="lien_haut" href="BD_Projet_Contact.html">Contacte-nous</a>
- <?php
- if(isset($_GET['erreur'])){
- $err = $_GET['erreur'];
- if($err==1 || $err==2)
- echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+  <br>
+  <?php 
+ if (isset($erreur)){
+	 echo '<a style="color:red">'.$erreur."</a>";
  }
  ?>
  </form>
