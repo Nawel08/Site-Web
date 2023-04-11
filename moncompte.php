@@ -1,17 +1,19 @@
 <?php
 session_start(); //on démarre la session
-$DB= new PDO('mysql:localhost;dbname=siteweb','root',''); //connexion à la base de donnée
-if(isset($_POST['username'])){//si ma variable username existe
-$requser= $DB->prepare('SELECT * FROM utilisateur WHERE username=?'); //requete sql pour récuperer nom d'utilisateur de la base de donnée
-$requser->execute(array($_POST['username'])); //on execute la requête 
-$userinfo=$requser->fetch(); //affichage des données
+$DB= new PDO('mysql:host=127.0.0.1;dbname=siteweb','root',''); //connexion à la base de donnée
+if(isset($_SESSION['mail'])){//si ma variable de session mail existe
+$getmail=htmlspecialchars($_SESSION['mail']); //pour sécuriser la variable
+$requser=$DB->prepare('SELECT * FROM utilisateur WHERE mail=?');
+$requser->execute(array($getmail)); //execution de la requete avec notre getid on récup le même id que celui du login
+$userinfo=$requser->fetch(); //on affiche les données de la base de donnée
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>N&T School | Mon Compte </title>
-<link rel="stylesheet" type="text/css" href="accueil.css">
+<link rel="stylesheet" type="text/css" href="moncompte.css">
 </head>
 <body>
 <?php
@@ -25,27 +27,21 @@ $userinfo=$requser->fetch(); //affichage des données
 	<br><br>
 	<table>
 	<tr><td>Nom :</td><td></td></tr>
-	<tr><td>Prénom :</td><td></td></tr>
-	<tr><td>Email :</td><td><?php echo $userinfo['username'];?></td></tr>
-	<tr><td>Mot de passe :</td><td><?php echo $userinfo['mot_de_passe'];?></td></tr>
+	<tr><td>Prénom :</td><td><?php echo $userinfo['prenom']; ?></td></tr>
+	<tr><td>Email :</td><td><?php echo $userinfo['mail'];?></td></tr>
+	<tr><td>Mot de passe :</td><td><?php echo $userinfo['password'];?></td></tr>
+	
 	</table>
-	<table>
-	<tr>
-	<td><a href="deconnexion.php">Se déconnecter </a></td>
-	<td><a href="modification">Modifier mon profil </a></td>
-	</tr>
+	
+	<a href="deconnexion.php" style="color:white;">Se déconnecter </a><br>
+	<a href="modification.php">Modifier mon profil </a>
+	
 	</section>
 	
-	<hr><br><br><br><br>
-	<footer class="foot">
-	<a href="FAQ.html"> FAQ</a>
-	<a href="mention.html">Mentions légales </a>
-	<a href="nous.html"> Qui sommes nous ? </a>
-	<a href="Lesabonnements.html"> Nos abonnements </a>
-	<a href="BD_Projet_Contact.html"> Nous contacter </a>
-	</footer>
-
-	
+	<br><br><br><br><br><br><br>
+	<?php
+	require('footer.html');
+	?>
 	
 	</body>
 
@@ -53,7 +49,8 @@ $userinfo=$requser->fetch(); //affichage des données
 <?php
 }
 else{
-echo "Pas de variable username";}
+echo "variable n'existe pas";} //pour vérifier l'erreur
 
 ?>
+
 
