@@ -1,8 +1,11 @@
+<?php
+session_start();
+$DB = new PDO('mysql:host=127.0.0.1;dbname=siteweb','root',''); //connexion avec notre base de donnée
 //utilisation de host=127.0.1 car plus rapide 
 if (isset($_POST['formconnexion'])){
 $mailconnect=htmlspecialchars($_POST['username']); //je récupère la variable de mon formulaire
 $mdpconnect=sha1($_POST['password']); //même type d'encodage que dans l'inscription mon compte pour pouvoir reconnaitre le mot de passe
-$requser=$DB->prepare("SELECT * FROM utilisateur WHERE mail=? AND password=?"); //requete sql qui récu^ère tous les noms d'utilisateur et les mots de passes
+$requser=$DB->prepare("SELECT * FROM utilisateur WHERE mail=? AND password=?"); //requete sql qui récupère tous les noms d'utilisateur et les mots de passes
 $requser->execute(array($mailconnect,$mdpconnect)); //on execute la requete sql avec nos variables initialisé plus haut
 $userexist= $requser->rowCount(); //nous permet de compter le nombre de colonne qui existe avec les info de l'utilisateur
 if($userexist==1){ //si le mail et le mdp existe dans la base de donnée
@@ -33,7 +36,7 @@ else{
 ?>
  <div id="container">
 
- <form action="" method="POST"> 
+ <form action="" method="POST" > 
  <h1>Connexion</h1>
  
  <label><b>Nom d'utilisateur</b></label>
