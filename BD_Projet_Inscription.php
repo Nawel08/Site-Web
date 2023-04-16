@@ -1,4 +1,25 @@
-!DOCTYPE html>
+<?php
+session_start(); //initialisation d'une nouvelle session
+require 'db.class.php';
+$DB = new DB('localhost', 'root', '', 'siteweb');
+//$connexion = $DB->getConnexion();
+
+// Vérifiez que la connexion a réussi
+//if (!$connexion) {
+  //  die('Erreur de connexion à la base de données');
+//}
+if(!empty($_POST['mail']) AND !empty($_POST['mdp'])){ //on vérifie que l'email et le mdp ne sont pas vide
+	$mail=htmlspecialchars($_POST['mail']); //on affecte à la variable mail le mail du formulaire avec la fonction htmlspecialchars pour enlever les caractères html etc pour éviter les injections de code 
+	$prenom=htmlspecialchars($_POST['prenom']);
+	$mdp=sha1($_POST['mdp']);//de même mais on stocke le mot de passe sous forme crypté/haché dans la base de donnée pour ne pas y avoir accès
+	$DB->query("INSERT INTO utilisateur (mail,password,prenom) VALUES('$mail','$mdp','$prenom')"); //on insère dans la base de donnée le mail et le mot de passe de l'utilisateur 
+	header('Location: login.php');
+	
+}
+
+?>
+	
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -75,13 +96,9 @@
 	
 		<br>
 		</main>
-    <footer class="foot">
-	<a href="FAQ.html"> FAQ</a>
-	<a href="mention.html">Mentions légales </a>
-	<a href="nous.html"> Qui sommes nous ? </a>
-	<a href="Lesabonnements.php"> Nos abonnements </a>
-	<a href="BD_Projet_Contact.html"> Nous contacter </a>
-	
+    <?php
+	require('footer.html');
+	?>
 	<br>
 	<br>
 	<br>
