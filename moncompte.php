@@ -13,32 +13,44 @@ $userinfo=$requser->fetch(); //on affiche les données de la base de donnée
 <head>
 <meta charset="utf-8">
 <title>N&T School | Mon Compte </title>
-<link rel="stylesheet" type="text/css" href="moncompte.css">
+<link rel="stylesheet" type="text/css" href="moncompte2.css">
 </head>
 <body>
 <?php
 	require('header.html')
 	?>
 	
-	<section class="moncompte">
+	<section>
+	<br><br><br><br><br><br>
 	<br><br>
+	<div class="moncompte">
 	<h2>| Mon Compte </h2>
+	<br>
 	<h5>Mes informations personelles </h5>
+
 	<br><br>
-	<table>
-	<tr><td>Nom :</td><td></td></tr>
-	<tr><td>Prénom :</td><td><?php echo $userinfo['prenom']; ?></td></tr>
-	<tr><td>Email :</td><td><?php echo $userinfo['mail'];?></td></tr>
-	<tr><td>Mot de passe :</td><td><?php echo $userinfo['password'];?></td></tr>
-	
+	<table >
+	<tr><td width="20%">Prénom :</td><td><?php echo $userinfo['prenom']; ?></td><td></td><td style="text-align:center;"><label>Photo de profil :</label></td></tr>
+	<tr><td>Email :</td><td><?php echo $userinfo['mail'];?></td><td></td><td style="text-align: center" rowspan='2'><?php if (!empty($userinfo['avatar'])){ ?><img width="70%" height="70%"  style="border-radius: 25% 10%;" src="utilisateur/avatar/<?php echo $userinfo['avatar'];?>"> <?php } 
+		//si la variable de l'avatar dans la base de donnée n'est pas vide?></td></tr> 
+	<tr><td>Mot de passe :</td><td></td></tr><tr></td><td></td></tr>
 	</table>
+	<br><br>
 	
-	<a href="deconnexion.php" style="color:white;">Se déconnecter </a><br>
-	<a href="modification.php">Modifier mon profil </a>
+	<h5>Mes abonnements </h5>
+	<table>
+	<tr><td>Abonnement en cours :</td><td><?php echo $userinfo['mail'];?></td></tr><tr></td><td></td></tr>
+	</table>
+	<br><br><br><br>
 	
+	<a href="modification.php">Modifier mon profil </a><br><br>
+	<a href="deconnexion.php">Se déconnecter </a><br><br>
+	<a href="supprimercompte.php?mail=<?php $userinfo['mail'];?>">Supprimer compte </a><br><br>
+	
+	<br><br><br>
 	</section>
-	
-	<br><br><br><br><br><br><br>
+	</div>
+	<br><br><br><br><br><br><br><br><br>
 	<?php
 	require('footer.html');
 	?>
@@ -49,8 +61,10 @@ $userinfo=$requser->fetch(); //on affiche les données de la base de donnée
 <?php
 }
 else{
-echo "variable n'existe pas";} //pour vérifier l'erreur
+header("Location: login.php");} //si on clique sur compte mais qu'on n'est pas connecté cela nous renvoie vers la page connexion
 
 ?>
+
+
 
 
