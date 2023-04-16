@@ -15,8 +15,8 @@ if(isset($_POST['nvxprenom']) AND !empty($_POST['nvxprenom']) AND $_POST['nvxpre
 	}
 
 if(isset($_POST['nvxmdp']) AND !empty($_POST['nvxmdp']) AND isset($_POST['nvxmdp2']) AND !empty($_POST['nvxmdp2'])){//si les mots de passes sont vides
-	$nvxmdp=sha1($_POST["nvxmdp"]); //pour hacher notre mdp
-	$nvxmdp2=sha1($_POST['nvxmdp2']);
+	$nvxmdp=PASSWORD_HASH($_POST["nvxmdp"],PASSWORD_DEFAULT); //pour hacher notre mdp
+	$nvxmdp2=PASSWORD_HASH($_POST['nvxmdp2'],PASSWORD_DEFAULT);
 	if ($nvxmdp==$nvxmdp2){ //si les mots de passe sont les mêmes 
 		$insertmdp=$DB->prepare("UPDATE utilisateur SET password=? WHERE mail=?"); //on fait la requete pour changer le mot de passe
 		$insertmdp->execute(array($_SESSION['mail'],$nvxmdp)); //on change le mot de passe avec le nouveau 
@@ -79,7 +79,11 @@ $extensionsValides=array('jpg','jpeg','png','gif'); //on initialise une variable
 	<tr><td></td></tr>
 	<tr><td></td><td><input type="submit" value="Mettre à jour mon profil" ></td></tr>
 	</table>
-	<?php if (isset($erreur)){echo $erreur;} //si l'erreur existe on l'affiche?>
+	<?php 
+ if (isset($erreur)){
+	 echo '<a style="color:red ;text-align:center;">'.$erreur."</a>";
+ }
+ //si l'erreur existe on l'affiche?>
 	</form>
 	<br><br><br>
 	</section>
@@ -98,5 +102,7 @@ else{
 header("Location: login.php");}
 
 ?>
+
+
 
 
