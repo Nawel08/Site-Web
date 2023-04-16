@@ -1,7 +1,7 @@
 <?php
-session_start(); //initialisation d'une nouvelle session
+
 require 'db.class.php';
-$DB = new DB('localhost', 'root', '', 'siteweb');
+$DB = new PDO('mysql:host=127.0.0.1;dbname=siteweb','root',''); //connexion base de donnée
 //$connexion = $DB->getConnexion();
 
 // Vérifiez que la connexion a réussi
@@ -11,9 +11,22 @@ $DB = new DB('localhost', 'root', '', 'siteweb');
 if(!empty($_POST['mail']) AND !empty($_POST['mdp'])){ //on vérifie que l'email et le mdp ne sont pas vide
 	$mail=htmlspecialchars($_POST['mail']); //on affecte à la variable mail le mail du formulaire avec la fonction htmlspecialchars pour enlever les caractères html etc pour éviter les injections de code 
 	$prenom=htmlspecialchars($_POST['prenom']);
-	$mdp=sha1($_POST['mdp']);//de même mais on stocke le mot de passe sous forme crypté/haché dans la base de donnée pour ne pas y avoir accès
-	$DB->query("INSERT INTO utilisateur (mail,password,prenom) VALUES('$mail','$mdp','$prenom')"); //on insère dans la base de donnée le mail et le mot de passe de l'utilisateur 
-	header('Location: login.php');
+	$mdp=PASSWORD_HASH($_POST['mdp'],PASSWORD_DEFAULT);//de même mais on stocke le mot de passe sous forme crypté/haché dans la base de donnée pour ne pas y avoir accès
+	if (strlen($mail)<250){
+		$reqmail=$DB->prepare("SELECT * FROM utilisateur where mail= ?");
+		$reqmail->execute(array($mail));
+		$mailexist=$reqmail->rowCount();
+		if ($mailexist==0){
+		$insert=$DB->prepare("INSERT INTO utilisateur (mail,password,prenom) VALUES (?,?,?)"); //on insère dans la base de donnée le mail et le mot de passe de l'utilisateur 
+		$insert->execute(array($mail,$mdp,$prenom)); //a la place des points d'interrogation on met ces valeurs
+		header('Location: login.php');}
+		else{
+			$erreur="Mail déjà existant";
+		}
+	}
+	else{
+		$erreur="Votre email ne doit pas dépasser 250 caractères.";
+	}
 	
 }
 
@@ -71,6 +84,14 @@ if(!empty($_POST['mail']) AND !empty($_POST['mdp'])){ //on vérifie que l'email 
 		</select>
 		</tr>
 		
+		<tr><td></td>
+		
+		<td><?php 
+ if (isset($erreur)){
+	 echo "<a style='color:red ;text-align:center;'>".$erreur."</a>";
+ }
+ ?></td>
+		</tr>
 		<tr>
 		<td>
 		<br>
@@ -84,6 +105,7 @@ if(!empty($_POST['mail']) AND !empty($_POST['mdp'])){ //on vérifie que l'email 
 		</tr>
 		</table>
 		</form>
+		 
 		<br>
 		<br>
 		<br>
