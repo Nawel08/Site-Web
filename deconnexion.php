@@ -1,3 +1,4 @@
+ <!-- BEN OMRANE et ZAIT -->
  <?php
  session_start(); //on ouvre la session
  $_SESSION=array(); //on la met dans un tableau
