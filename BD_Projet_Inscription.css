@@ -1,3 +1,5 @@
+/*BEN OMRANE et ZAIT */
+
 /* Reset CSS */
 * {
     margin: 0;
@@ -6,131 +8,147 @@
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 62.5%; /* Définit la taille de la police à 62,5% de la taille par défaut pour faciliter le calcul des tailles de police */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f6f6f6;
-    color: #333;
+    font-family: 'Roboto', sans-serif; /* Définit la police de caractères pour le corps de la page */
+    background-color: #f6f6f6; /* Définit la couleur de fond de la page */
+    color: #333; /* Définit la couleur de texte par défaut pour la page */
 }
 
 /* Container */
 .inscription-container {
-    width: 100%;
-    max-width: 500px;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-    padding: 30px;
-    border-radius: 5px;
+    width: 100%; /* Définit la largeur du conteneur */
+    max-width: 500px; /* Définit la largeur maximale du conteneur */
+    background-color: #ffffff; /* Définit la couleur de fond du conteneur */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre à la boîte */
+    margin: 50px auto; /* Définit la marge extérieure du conteneur */
+    padding: 30px; /* Définit la marge intérieure du conteneur */
+    border-radius: 5px; /* Définit le rayon de courbure des coins du conteneur */
 }
 
 h1 {
-    color: white;
-    font-size: 2.5rem;
-    font-family: "Georgia", serif;
-    margin-bottom: 25px;
-    text-align: center;
+    color: white; /* Définit la couleur du texte */
+    font-size: 2.5rem; /* Définit la taille de la police */
+    font-family: "Georgia", serif; /* Définit la police de caractères */
+    margin-bottom: 25px; /* Définit la marge inférieure */
+    text-align: center; /* Centre le texte horizontalement */
 }
 
 .form-row {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+    display: flex; /* Définit le type d'affichage pour le conteneur */
+    flex-direction: column; /* Définit la direction de la disposition des éléments enfants */
+    margin-bottom: 15px; /* Définit la marge inférieure pour chaque élément */
 }
+
 /* Ajoutez ces styles à votre code CSS */
 .error {
-    color: red;
+    color: red; /* Définit la couleur pour les messages d'erreur */
 }
 
 .succes {
-    color: green;
+    color: green; /* Définit la couleur pour les messages de succès */
 }
-
-
 
 .form-row input,
 .form-row select {
-    padding: 10px;
-    font-size: 1.6rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 90%;
-    outline: none;
+    padding: 10px; /* Définit la taille de la police */
+    font-size: 1.6rem; /* Définit la taille de la police */
+    border: 1px solid #ccc; /* Définit la couleur de la bordure */
+    border-radius: 5px; /* Définit le rayon de courbure des coins */
+    width: 90%; /* Définit la largeur de l'élément */
+    outline: none; /* Supprime la bordure autour de l'élément lorsqu'il est sélectionné */
 }
 
 button {
-    background-color: blue;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 40%;
-    margin-top: 1rem;
+    background-color: blue; /* Définit la couleur de fond */
+    border: none; /* Supprime la bordure */
+    color: white; /* Définit la couleur de texte */
+    padding: 10px; /* Définit la taille de la police */
+    text-align: center; /* Centre le texte horizontalement */
+    text-decoration: none; /* Supprime la décoration de texte */
+    display: inline-block; /* Définit le type d'affichage pour l'élément */
+    font-size: 16px; /* Définit la taille de la police */
+    cursor: pointer; /* Change l'apparence du curseur lorsque l'utilisateur passe sur l'élément */
+    border-radius: 5px; /* Définit le rayon de courbure des coins */
+    width: 40%; /* Définit la largeur de l'élément */
+    margin-top: 1rem; /* Définit la marge supérieure */
 }
 
 button:hover {
-    background-color: darkblue;
+    background-color: darkblue; /* Définit la couleur de fond au survol de l'élément */
 }
 
 /* Bootstrap overrides */
 .card {
-    border-radius: 5px;
+    border-radius: 5px; /* Définit le rayon de courbure des coins */
 }
 
 .btn-primary {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #4CAF50; /* Définit la couleur de fond */
+    border-color: #4CAF50; /* Définit la couleur de la bordure */
 }
 
 .btn-primary:hover {
-    background-color: #45a049;
-    border-color: #45a049;
-}
-.form-row label {
-    color: #191970; /* Couleur bleu nuit */
+    background-color: #45a049; /* Définit la couleur de fond au survol de l'élément */
+    border-color: #45a049; /* Définit la couleur de la bordure au survol de l'élément */
 }
 
- .validator-criters {
-  padding: 10px 50px;
-  margin: auto;
+.form-row label {
+    color: #191970; /* Définit la couleur de texte pour les étiquettes */
+}
+
+.validator-criters {
+    padding: 10px 50px; /* Définit la marge intérieure */
+    margin: auto; /* Centre l'élément horizontalement */
 }
 
 .validator-criters span {
-  display: block;
-  color: black;
-  font-size: 13px;
-  margin: 5px 0;
+    display: block; /* Définit le type d'affichage pour l'élément */
+    color: black; /* Définit la couleur de texte */
+    font-size: 13px; /* Définit la taille de la police */
+    margin: 5px 0; /* Définit la marge autour de l'élément */
 }
 
- .validator-criters span.error {
-  color: #a70b0b;
+.validator-criters span.error {
+    color: #a70b0b; /* Définit la couleur de texte pour les messages d'erreur */
 }
+
 .validator-criters span.succes {
-  color: #97df07;
+    color: #97df07; /* Définit la couleur de texte pour les messages de succès */
 }
-.validator-criters{
-        padding: 10px 50px;
-        margin: auto;
+/* Définit les styles pour les messages de validation */
+.validator-criters {
 
-        span{
-            display: block;
-            color: black;
-            font-size: 13px;
-            margin: 5px 0;
+    /* Ajoute une marge intérieure de 10 pixels en haut et en bas et de 50 pixels à gauche et à droite */
+    padding: 10px 50px;
 
-            &.error{
-                color: rgb(167, 11, 11);
-            }
-            &.succes{
-                color: rgb(151, 223, 7);
-            }
+    /* Centre horizontalement le bloc de messages de validation */
+    margin: auto;
+
+    /* Définit les styles pour les balises span à l'intérieur de la classe .validator-criters */
+    span {
+        /* Affiche chaque message de validation sur une ligne séparée */
+        display: block;
+
+        /* Définit la couleur du texte à noir pour les messages de validation */
+        color: black;
+
+        /* Définit la taille de police pour les messages de validation */
+        font-size: 13px;
+
+        /* Ajoute une marge de 5 pixels en haut et en bas et aucune marge à gauche et à droite */
+        margin: 5px 0;
+
+        /* Définit la couleur du texte en rouge pour les messages d'erreur */
+        &.error {
+            color: rgb(167, 11, 11);
+        }
+
+        /* Définit la couleur du texte en vert pour les messages de succès */
+        &.succes {
+            color: rgb(151, 223, 7);
         }
     }
 }
