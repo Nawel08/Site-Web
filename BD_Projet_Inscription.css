@@ -1,0 +1,136 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f6f6f6;
+    color: #333;
+}
+
+/* Container */
+.inscription-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    font-family: "Georgia", serif;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+/* Ajoutez ces styles à votre code CSS */
+.error {
+    color: red;
+}
+
+.succes {
+    color: green;
+}
+
+
+
+.form-row input,
+.form-row select {
+    padding: 10px;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 90%;
+    outline: none;
+}
+
+button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 40%;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+/* Bootstrap overrides */
+.card {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+.form-row label {
+    color: #191970; /* Couleur bleu nuit */
+}
+
+ .validator-criters {
+  padding: 10px 50px;
+  margin: auto;
+}
+
+.validator-criters span {
+  display: block;
+  color: black;
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+ .validator-criters span.error {
+  color: #a70b0b;
+}
+.validator-criters span.succes {
+  color: #97df07;
+}
+.validator-criters{
+        padding: 10px 50px;
+        margin: auto;
+
+        span{
+            display: block;
+            color: black;
+            font-size: 13px;
+            margin: 5px 0;
+
+            &.error{
+                color: rgb(167, 11, 11);
+            }
+            &.succes{
+                color: rgb(151, 223, 7);
+            }
+        }
+    }
+}
