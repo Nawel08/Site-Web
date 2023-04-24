@@ -81,5 +81,55 @@ li a {
 /* Cette section définit les styles pour les sous-menus déroulants de la barre de navigation */
 .sub-menu {
   display: none; /* masquage des sous-menus */
-  position: absolute; /* position absolue pour le positionnement des sous-menus }
+  position: absolute; /* position absolue pour le positionnement des sous-menus 
+   width:100px;
+}
+ /* Style pour les éléments de liste (li) dans le sous-menu */
+.sub-menu li {
+  display: block; /* Affichage en bloc */
+}
+
+/* Style pour le sous-menu lorsqu'on le survole */
+.sub-menu:hover {
+  font-weight: bold; /* Texte gras */
+  color: black; /* Couleur de texte noire */
+}
+
+/* Style pour les éléments de liste (li) dans la barre de navigation */
+header li {
+  position: relative; /* Position relative */
+  vertical-align: top; /* Alignement vertical en haut */
+}
+
+/* Comportement lorsque l'utilisateur survole un élément de liste dans la barre de navigation */
+header li:hover .sub-menu {
+  display: block; /* Affichage du sous-menu associé */
+}
+
+/* Style pour l'élément qui contient le logo */
+#logo {
+  flex: 2 1 40rem; /* Flexible et adapte sa taille à la fenêtre du navigateur */
+  margin-left: 25px; /* Marge à gauche de 25px */
+}
+
+/* Style pour le conteneur de la zone de recherche */
+.search {
+  display: flex; /* Affichage en ligne */
+  align-items: center; /* Alignement vertical centré */
+  margin-right: 10px; /* Marge à droite de 10px */
+}
+
+/* Style pour la zone de recherche elle-même */
+.search input {
+  width: 300px; /* Largeur fixe de 300px */
+  border: 2px solid black; /* Bordure de 2px en noir */
+  padding: 10px; /* Remplissage de 10px */
+  border-radius: 30px; /* Rayon de bordure de 30px */
+}
+
+/* Style pour l'icône de la loupe dans la zone de recherche */
+.search i {
+  position: absolute; /* Position absolue */
+  margin-left: 270px; /* Marge à gauche de 270px */
+}
 
