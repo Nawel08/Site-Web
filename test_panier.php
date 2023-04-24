@@ -136,7 +136,7 @@ require_once('header.html');
             <br><br>
 			<!--Insertion de nos champs à l'aide des balises label et input -->
             <label for="nom">Nom</label>
-            <input type="text" name="nom_carte" required>
+            <input type="text" placeholder="Nom" name="nom_carte" required>
             <label for="numero">Numéro de carte</label>
 			<input type="text" name="num_carte" placeholder="ex: 1234 1234 1234 1234" required>
 			<label for="date_exp">Date d'expiration</label>
