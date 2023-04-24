@@ -1,57 +1,159 @@
 <!-- BEN OMRANE et ZAIT -->
-<?php
-require 'db.class.php'; // inclure le fichier de la classe de connexion à la base de données
-$DB = new DB('localhost', 'root', '', 'siteweb'); // créer une nouvelle instance de la classe DB pour se connecter à la base de données
-//var_dump($_GET['ids']);
-//var_dump($_GET);
-$date_commande = date('H:i d-m-Y'); // obtenir la date et l'heure actuelle
-
-if (isset($_GET['ids'])) { // on vérifie si la variable ids contient quelque chose
-   $ids = $_GET['ids']; // on récupére la valeur du paramètre 'ids'
-   $abonnements = explode(',', $ids); // séparer la chaîne de caractères en utilisant la virgule comme délimiteur et stocker les résultats dans un tableau
-}
-?>
 
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
 <head>
+<!-- Encodage de caractère utilisé pour la page-->
     <meta charset="UTF-8">
-    <title>Confirmation de commande</title>
+	<!-- Titre de la page-->
+    <title>Récapitulatif de commande</title>
+	<!-- Importation d'un fichier CSS provenant d'une source externe-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- Balise style où des style relatifs a nos classes, balise sosnt spécifiés. -->
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        table {
+            width: 50%;
+            margin-bottom: 40px;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        label {
+            margin-left: 160px;
+            font-size: 15px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            margin-left: 160px;
+            width: 50%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+        }
+
+        .valider {
+            font-size: 15px;
+            display: block;
+            width: 50%;
+            padding: 10px;
+            background-color: #0071eb;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 160px;
+        }
+
+        .valider:hover {
+            font-weight: bold;
+        }
+
+        fieldset {
+            height: 400px;
+        }
+		legend{
+			margin-left:80px;
+		}
+    </style>
 </head>
-<body>
-    <h1>Votre commande a été enregistrée</h1>
-	<?php
-	$to="zait.inesnawel@gmail.com"; // spécifier l'adresse email du destinataire
-$subject="Utilisation de mail()"; // spécifier le sujet du message
-$message="Salut :) "; // spécifier le contenu du message
-$headers="Content-Type:text/plain;charset=utf-8\r\n"; // spécifier le type et le jeu de caractères du contenu
-$headers.="From nawelz0311@gmail.com\r\n"; // spécifier l'adresse email de l'expéditeur
+<!-- fermeture de la balsie head-->
 
-if(mail($to,$subject,$message,$headers)) // envoyer le message par email et vérifier si l'envoi a réussi
-echo 'envoyé !'; // afficher un message de confirmation si l'envoi a réussi
-else
-echo 'erreur :('; // afficher un message d'erreur si l'envoi a échoué
+<!--Après l'ouverture de notre fichier html, on utilise du code php afin d'insérer notre en tête qui se trouve dans le fichier 'header.html'-->
+<?php
+session_start(); // Démarrer la session pour accéder aux variables de session
+require_once('header.html');
 ?>
-    <p>Nous vous remercions pour votre achat. Un email de confirmation a été envoyé à votre adresse.</p>
-    
-    <p>Date de commande : <?php echo $date_commande; ?></p>
-    <p>Abonnements achetés :</p>
-    <?php if (isset($abonnements) && !empty($abonnements)): ?> // vérifier si le tableau des abonnements n'est pas vide
-    <ul>
-    <?php
-        foreach ($abonnements as $id_abonnement) { // boucle sur le tableau des abonnements pour afficher les détails de chaque abonnement
-    $requete = $DB->prepare('SELECT * FROM abonnement WHERE id_abonnement = ?'); // préparer une requête SQL pour récupérer les informations de l'abonnement correspondant à l'ID
-    $requete->execute(array($id_abonnement)); // exécuter la requête en utilisant l'ID de l'abonnement comme paramètre
-    $abonnement = $requete->fetch(); // récupérer les résultats de la requête et stocker les informations dans un tableau
+<body> 
 
-    echo '<li>';
-    echo 'Nom de l\'abonnement: ' . $abonnement['nom'] . '<br>'; // afficher le nom de l'abonnement
-    echo 'Prix: ' . $abonnement['prix'] . '<br>'; // afficher le prix de l'abonnement
-    echo 'Heures de Visio: ' . $abonnement['heure_visio']; //afficher l'heure de visio de l'abonnement
-    echo '</li>';
-}
-    ?>
-    </ul>
-    <?php endif; ?> //pour fermer la structure du if
+<br><br> <br><br>
+    <div class="container">
+	<br><br><br>
+	
+	<!--balise h1 spécifiant le premier titre de la page -->
+        <h1 style="color:black;">Paiement</h1>
+        <!--Ouverture d'une table afin de structurer nos champs -->
+        <table>
+		<!-- Utilisation de code php afin d'avoir un lien avec notre base de donnée-->
+            <?php
+			
+			require 'db.class.php'; // Inclure le fichier db.class.php pour se connecter à la base de données
+			$DB = new DB('localhost', 'root', '', 'siteweb'); // Instancier l'objet DB pour se connecter à la base de données
+
+			if (isset($_SESSION['panier'])) { // Vérifier si la variable de session 'panier' existe
+			$ids = implode(',', $_SESSION['panier']); // Récupérer les identifiants des abonnements sélectionnés dans le panier
+			try {
+				$stmt = $DB->query("SELECT * FROM abonnement WHERE id_abonnement IN ($ids)"); // Exécuter une requête SQL pour récupérer les informations des abonnements sélectionnés
+				if ($stmt instanceof PDOStatement) { // Vérifier si l'objet de la requête est une instance de PDOStatement
+					$abonnements = $stmt->fetchAll(); // Récupérer toutes les lignes du résultat de la requête dans un tableau
+					foreach ($abonnements as $abonnement) { // Parcourir le tableau de résultats
+						echo '<tr>'; // Afficher une nouvelle ligne de tableau 
+						echo '<td>' . $abonnement['nom'] . '</td>'; // Afficher le nom de l'abonnement dans une cellule
+						echo '<td>' . $abonnement['prix'] . ' €</td>'; // Afficher le prix de l'abonnement dans une cellule
+						echo '</tr>'; // Fermer la ligne de tableau 
+					}
+				}
+			} catch (PDOException $e) { // Si une exception est levée lors de l'exécution de la requête
+				echo 'Erreur PDO : ' . $e->getMessage(); // Afficher le message d'erreur
+			}
+		}
+
+            ?>
+			
+        </table>
+     <!-- fermeture du tableau-->
+	 
+	 <!--Formulaire relatif au traitement de la commande, on y retrouvera tous les champs lié au paiement. -->
+	 <!-- Pour cela, on utilise la méthode POST-->
+	 <!--Une fois le formulaire soumis, l'utilisateur sera dirigé vers la page traitement_commande.php -->
+    <form action="traitement_commande.php" method="POST">
+	<!--Utilisation de la balise fieldset afin d'avoir automatiquement les bords d'un tableau  -->
+        <fieldset>
+            <br><br>
+			<!--Insertion de nos champs à l'aide des balises label et input -->
+            <label for="nom">Nom</label>
+            <input type="text" name="nom_carte" required>
+            <label for="numero">Numéro de carte</label>
+			<input type="text" name="num_carte" placeholder="ex: 1234 1234 1234 1234" required>
+			<label for="date_exp">Date d'expiration</label>
+            <input type="text" name="date_expiration" placeholder="ex: 03/25" required>
+                <label for="cvv">CVV</label>
+                <input type="text" name="cvv" placeholder="ex: 908 " required><br>
+		</fieldset>
+		<br><br>
+		<!-- Boutton de validation du formulaire-->
+		<input type="submit" class="valider" value="Valider la commande">
+		<br>
+	</form>
+	</div>
+	<!-- Insertion du code necessaire pour avoir le pied de page-->
+	<?php
+	require_once('footer.html');
+	?>
 </body>
 </html>
