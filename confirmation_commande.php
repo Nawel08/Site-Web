@@ -1,159 +1,195 @@
-<!-- BEN OMRANE et ZAIT -->
+<!--BEN OMRANE et ZAIT -->
+
+<?php
+session_start(); // on démarre la session
+require 'db.class.php'; // on importe le fichier db.class.php qui contient la classe de connexion à la base de données
+$DB = new DB('localhost', 'root', '', 'siteweb'); // on crée une instance de la classe DB pour se connecter à la base de données
+
+if (isset($_SESSION['panier'])) { // si la variable de session 'panier' existe
+    $ids = implode(',', $_SESSION['panier']); // on récupère les IDs des abonnements sélectionnés dans le panier et on les stocke dans une chaîne de caractères séparés par des virgules
+    $abonnements = array();
+	try {
+        $stmt = $DB->query("SELECT * FROM abonnement WHERE id_abonnement IN ($ids)"); // on exécute une requête SQL pour récupérer les informations des abonnements sélectionnés dans le panier
+        if ($stmt instanceof PDOStatement) { // si la requête est bien une instance de PDOStatement
+            $abonnements = $stmt->fetchAll(); // on stocke les résultats de la requête dans un tableau associatif
+            foreach ($abonnements as $abonnement) { // pour chaque abonnement dans le tableau
+                echo '<tr>';
+                echo '<td>' . $abonnement['nom'] . '</td>'; // on affiche le nom de l'abonnement dans une cellule du tableau HTML
+                echo '<td>' . $abonnement['prix'] . ' €</td>'; // on affiche le prix de l'abonnement dans une cellule du tableau HTML
+                echo '</tr>';
+            }
+        }
+					
+    } catch (PDOException $e) { // en cas d'erreur PDO lors de l'exécution de la requête
+        echo 'Erreur PDO : ' . $e->getMessage(); // on affiche le message d'erreur PDO
+    }
+}
+?>
 
 <!DOCTYPE html>
 
-<html lang="fr">
 <head>
-<!-- Encodage de caractère utilisé pour la page-->
+<!-- Importation du fichier contenant notre header.-->
+<?php
+	require_once('header.html');
+	?>
+	<!--Encodage nécéssaire -->
     <meta charset="UTF-8">
-	<!-- Titre de la page-->
-    <title>Récapitulatif de commande</title>
-	<!-- Importation d'un fichier CSS provenant d'une source externe-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<!-- Balise style où des style relatifs a nos classes, balise sosnt spécifiés. -->
+	<!-- Style CSS-->
     <style>
+	footer{
+		widht:100%;
+	}
+	header{
+		width:100%;
+	}
         body {
-            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: white;
+            margin: 20px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
+        .header {
             text-align: center;
-            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .header h1 {
             font-size: 24px;
+            margin: 0;
+			margin-top:30px;
         }
 
-        table {
-            width: 50%;
+        .header p {
+            margin: 5px 0 0;
+        }
+
+        .info {
+            padding: 15px 0;
+        }
+
+        .info p {
+            margin: 5px 0;
+			margin-top: 40px;
+			font-size:18px;
+			
+        }
+
+        .items {
+            border-collapse: collapse;
+            width: 70%;
+			margin-left:150px;
             margin-bottom: 40px;
+			margin-top: 40px;
         }
-
-        table td {
-            padding: 10px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        label {
-            margin-left: 160px;
-            font-size: 15px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"] {
-            margin-left: 160px;
-            width: 50%;
-            padding: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 3px;
-        }
-
-        .valider {
-            font-size: 15px;
-            display: block;
-            width: 50%;
-            padding: 10px;
-            background-color: #0071eb;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 160px;
-        }
-
-        .valider:hover {
-            font-weight: bold;
-        }
-
-        fieldset {
-            height: 400px;
-        }
-		legend{
-			margin-left:80px;
+		.items th{
+			color:black;
 		}
+        .items th,
+        .items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .items th {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
     </style>
 </head>
-<!-- fermeture de la balsie head-->
 
-<!--Après l'ouverture de notre fichier html, on utilise du code php afin d'insérer notre en tête qui se trouve dans le fichier 'header.html'-->
-<?php
-session_start(); // Démarrer la session pour accéder aux variables de session
-require_once('header.html');
+<body>
+    <div class="header">
+	<!--Balise h1 indiquant le titre de la page -->
+        <h1>Confirmation de commande</h1>
+		<!--affichage de la variable qui indique à quelle heure la commande a été effectuée -->
+        <p>Date de commande : <?php $date_commande = date('H:i d-m-Y');
+ echo $date_commande; ?></p>
+    </div>
+	<!-- Div relatives aux informations de la commande effectuée-->
+    <div class="info">
+        <p>Nous vous remercions pour votre achat. </p>
+        <?php
+$getmail = htmlspecialchars($_SESSION['mail']);
+$requser = $DB->prepare('SELECT * FROM utilisateur WHERE mail=?');
+$requser->execute(array($getmail));
+$userinfo = $requser->fetch();
+
+	$to=$userinfo['mail'];
+$subject="Confirmation de commande";
+$message = '<html><body>';
+$message .= '<style> h1 {color: red;} p {font-size: 16px;} </style>';
+$message .= '<h1>Confirmation de commande</h1>';
+$message .= '<p>Nous vous remercions pour votre commande, elle a été enregistrée avec succès.</p>';
+$message .= '<h3>Voici le récapitulatif:</h3>';
+$message .= '<table>';
+$message .= '<tr><th>Nom de l\'abonnement</th><th>Prix</th><th>Heures de Visio</th></tr>';
+
+
+foreach ($abonnements as $id_abonnement) {
+    $requete = $DB->prepare('SELECT * FROM abonnement WHERE id_abonnement = ?');
+    $requete->execute(array($id_abonnement));
+    $abonnement = $requete->fetch();
+    $message .= '<tr><td>' . $abonnement['nom'] . '</td><td>' . $abonnement['prix'] . '</td><td>' . $abonnement['heure_visio'] . '</td></tr>';
+}
+$message .= '</table>';
+
+$message .= '</body></html>';
+$headers="MIME-Version: 1.0" . "\r\n";
+$headers.="Content-Type:text/html;charset=utf-8\r\n";
+$headers.="From: nawelz0311@gmail.com\r\n";
+
+if(mail($to,$subject,$message,$headers))
+echo 'Le récapitulatif de votre commande vous a été envoyé par mail !';
+else
+echo "L'email de conformation n'a pas pu être envoyé :(";
 ?>
-<body> 
+<p>Abonnements achetés :</p>
+    </div>
 
-<br><br> <br><br>
-    <div class="container">
-	<br><br><br>
-	
-	<!--balise h1 spécifiant le premier titre de la page -->
-        <h1 style="color:black;">Paiement</h1>
-        <!--Ouverture d'une table afin de structurer nos champs -->
-        <table>
-		<!-- Utilisation de code php afin d'avoir un lien avec notre base de donnée-->
+    <table class="items">
+        <thead>
+            <tr>
+                <th>Nom de l'abonnement</th>
+                <th>Prix</th>
+                <th>Heures de Visio</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if (isset($abonnements) && !empty($abonnements)): ?>
             <?php
-			
-			require 'db.class.php'; // Inclure le fichier db.class.php pour se connecter à la base de données
-			$DB = new DB('localhost', 'root', '', 'siteweb'); // Instancier l'objet DB pour se connecter à la base de données
-
-			if (isset($_SESSION['panier'])) { // Vérifier si la variable de session 'panier' existe
-			$ids = implode(',', $_SESSION['panier']); // Récupérer les identifiants des abonnements sélectionnés dans le panier
-			try {
-				$stmt = $DB->query("SELECT * FROM abonnement WHERE id_abonnement IN ($ids)"); // Exécuter une requête SQL pour récupérer les informations des abonnements sélectionnés
-				if ($stmt instanceof PDOStatement) { // Vérifier si l'objet de la requête est une instance de PDOStatement
-					$abonnements = $stmt->fetchAll(); // Récupérer toutes les lignes du résultat de la requête dans un tableau
-					foreach ($abonnements as $abonnement) { // Parcourir le tableau de résultats
-						echo '<tr>'; // Afficher une nouvelle ligne de tableau 
-						echo '<td>' . $abonnement['nom'] . '</td>'; // Afficher le nom de l'abonnement dans une cellule
-						echo '<td>' . $abonnement['prix'] . ' €</td>'; // Afficher le prix de l'abonnement dans une cellule
-						echo '</tr>'; // Fermer la ligne de tableau 
-					}
-				}
-			} catch (PDOException $e) { // Si une exception est levée lors de l'exécution de la requête
-				echo 'Erreur PDO : ' . $e->getMessage(); // Afficher le message d'erreur
-			}
-		}
-
+                foreach ($abonnements as $id_abonnement) {
+                    $requete = $DB->prepare('SELECT * FROM abonnement WHERE id_abonnement = ?');
+                    $requete->execute(array($id_abonnement));
+                    $abonnement = $requete->fetch();
             ?>
-			
-        </table>
-     <!-- fermeture du tableau-->
-	 
-	 <!--Formulaire relatif au traitement de la commande, on y retrouvera tous les champs lié au paiement. -->
-	 <!-- Pour cela, on utilise la méthode POST-->
-	 <!--Une fois le formulaire soumis, l'utilisateur sera dirigé vers la page traitement_commande.php -->
-    <form action="traitement_commande.php" method="POST">
-	<!--Utilisation de la balise fieldset afin d'avoir automatiquement les bords d'un tableau  -->
-        <fieldset>
-            <br><br>
-			<!--Insertion de nos champs à l'aide des balises label et input -->
-            <label for="nom">Nom</label>
-            <input type="text" name="nom_carte" required>
-            <label for="numero">Numéro de carte</label>
-			<input type="text" name="num_carte" placeholder="ex: 1234 1234 1234 1234" required>
-			<label for="date_exp">Date d'expiration</label>
-            <input type="text" name="date_expiration" placeholder="ex: 03/25" required>
-                <label for="cvv">CVV</label>
-                <input type="text" name="cvv" placeholder="ex: 908 " required><br>
-		</fieldset>
-		<br><br>
-		<!-- Boutton de validation du formulaire-->
-		<input type="submit" class="valider" value="Valider la commande">
-		<br>
-	</form>
-	</div>
-	<!-- Insertion du code necessaire pour avoir le pied de page-->
+            <tr>
+                <td><?php echo $abonnement['nom']; ?></td>
+                <td><?php echo $abonnement['prix']; ?></td>
+                <td><?php echo $abonnement['heure_visio']; ?></td>
+            </tr>
+            <?php } ?>
+        <?php endif; ?>
+		
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>Merci d'avoir choisi notre service.</p>
+    </div>
+	
 	<?php
 	require_once('footer.html');
 	?>
 </body>
 </html>
+
