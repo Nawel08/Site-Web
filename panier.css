@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.panier {
+    background-color: white;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+tr.total {
+    background-color: #f0f0f0;
+}
+
+.total th {
+    text-align: right;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+form input[type="text"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+button {
+    background-color:color: #0C0456;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0C0456;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form input[type="text"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #0C0456;
+}
+.td{
+	padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #0C0456;
+	
+}
+
+th{
+	padding: 5px 10px;
+    
+    border-radius: 3px;
+    font-size: 17px;
+    background-color: #fff;
+    color: #0C0456;
+	
+}
+
+h1{
+	padding: 5px 10px;
+   
+    border-radius: 3px;
+    font-size: 21px;
+    background-color: #fff;
+    color: #0C0456;
+	
+}
+table img {
+    max-width: 25px; /* Ajoutez cette ligne */
+    height: auto; /* Ajoutez cette ligne */
+}
+
+#code_promo{
+	padding: 5px 10px;
+   
+    border-radius: 3px;
+    font-size: 15px;
+    background-color: #fff;
+    color: #0C0456;
+}
+#code_promo_input{
+	padding: 5px 10px;
+   
+    border-radius: 3px;
+    font-size: 15px;
+    background-color: #fff;
+    color: #0C0456;
+}
+
+
+
+
+.promo-form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+form input[type="text"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #0C0456;
+}
+
+form button {
+    margin-left: 10px;
+}
+form[action="chatgpt.php"] {
+    display: flex;
+    justify-content: center;
+	background-color:color: #0C0456;;
+}

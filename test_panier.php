@@ -86,7 +86,9 @@
 
 <!--Après l'ouverture de notre fichier html, on utilise du code php afin d'insérer notre en tête qui se trouve dans le fichier 'header.html'-->
 <?php
+session_start(); // Démarrer la session pour accéder aux variables de session
 require_once('header.html');
+var_dump($_SESSION['panier']);
 ?>
 <body> 
 
@@ -95,12 +97,12 @@ require_once('header.html');
 	<br><br><br>
 	
 	<!--balise h1 spécifiant le premier titre de la page -->
-        <h1>Paiement</h1>
+        <h1 style="color:black;">Paiement</h1>
         <!--Ouverture d'une table afin de structurer nos champs -->
         <table>
 		<!-- Utilisation de code php afin d'avoir un lien avec notre base de donnée-->
             <?php
-			session_start(); // Démarrer la session pour accéder aux variables de session
+			
 			require 'db.class.php'; // Inclure le fichier db.class.php pour se connecter à la base de données
 			$DB = new DB('localhost', 'root', '', 'siteweb'); // Instancier l'objet DB pour se connecter à la base de données
 
@@ -136,7 +138,7 @@ require_once('header.html');
             <br><br>
 			<!--Insertion de nos champs à l'aide des balises label et input -->
             <label for="nom">Nom</label>
-            <input type="text" placeholder="Nom" name="nom_carte" required>
+            <input type="text" name="nom_carte" required>
             <label for="numero">Numéro de carte</label>
 			<input type="text" name="num_carte" placeholder="ex: 1234 1234 1234 1234" required>
 			<label for="date_exp">Date d'expiration</label>
