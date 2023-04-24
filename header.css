@@ -1,120 +1,85 @@
-/* GENERALITES */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* BEN OMRANE et ZAIT */
+/* Cette section applique des styles par défaut à tous les éléments de la page */
+* {
+  margin: 0; /* la marge intérieur est de 0*/
+  padding: 0; /* la marge extérieur est de 0 */
+  box-sizing: border-box; /*boite de modèle */
 }
 
-html{
-  font-size:62.5%;
- 
+/* Cette section définit la taille de police par défaut pour le document HTML */
+html {
+  font-size: 62.5%; /*taille de l'écriture */
 }
 
-body{
-  background-color:#0C0456;
-  color:white;
+/* Cette section définit les styles pour le corps de la page */
+body {
+  background-color: #0C0456; /* couleur de fond */
+  color: white; /* couleur du texte */
 }
 
-/*NAVIGATION */
-nav ul{
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-  list-style: none;
-  margin-right: 30px;
+
+/* Cette section définit les styles pour la barre de navigation */
+nav {
+  min-height: 10vh; /* hauteur minimale de la barre de navigation */
+  display: flex; /* affichage en ligne pour les éléments de navigation */
+  align-items: center; /* alignement vertical centré */
+  width: 100%; /* largeur de la barre de navigation */
+  margin: auto; /* centrage horizontal */
+  background-color: #F0F8FF; /* couleur de fond */
+  padding: 2rem; /* espacement intérieur */
 }
 
+/* Cette section définit les styles pour la liste de navigation */
+nav ul {
+  display: flex; /* affichage en ligne pour les éléments de navigation */
+  flex: 1; /* élasticité de la liste pour remplir l'espace disponible */
+  justify-content: flex-end; /* alignement à droite */
+  align-items: center; /* alignement vertical centré */
+  list-style: none; /* suppression de la liste à puces */
+  margin-right: 30px; /* marge à droite */
+}
+
+/* Cette section définit les styles pour les éléments de la liste de navigation */
 nav li {
-  margin-right: 25px;
+  margin-right: 25px; /* marge à droite */
 }
-nav li:hover{
-	transform: scale(1.05); /* aggrandissement de 5%*/
-	
+
+/* Cette section définit les styles pour les liens de la liste de navigation au survol */
+nav li:hover {
+  transform: scale(1.05); /* agrandissement de 5% */
 }
-.compte{
-	display: inline-block;
-  width:140px;
-  height:47px;
-  font-weight:bold;
-  font-size:15px;
-  
-  
-  border-radius: 10px;
-  text-decoration: none;
+
+/* Cette section définit les styles pour les liens de la liste de navigation */
+nav a {
+  color: #ffffff; /* couleur du texte */
+  text-decoration: none; /* suppression de la soulignement du lien */
+}
+
+/* Cette section définit les styles pour le lien "compte" de la barre de navigation */
+.compte {
+  display: inline-block; /* affichage en ligne pour le lien "compte" */
+  width: 140px; /* largeur du lien "compte" */
+  height: 47px; /* hauteur du lien "compte" */
+  font-weight: bold; /* graisse du texte */
+  font-size: 15px; /* taille de police */
+  border-radius: 10px; /* bordures arrondies */
+  text-decoration: none; /* suppression de la soulignement du lien */
 }
 
 
-nav a{
-  color:#ffffff;
-  text-decoration:none;
+/* Cette section définit les styles pour le titre de la page */
+header li a {
+  display: block; /* affichage en bloc pour le lien du titre */
 }
 
-nav{
-  min-height:10vh;
-  display:flex;
-  align-items:center;
-  width:100%;
-  margin:auto;
-  background-color:#F0F8FF;
-  padding:2rem; /*taille de la baniere*/
-}
-
-/* HEADER */
-header li a{
-  display:block;
-}
-
+/* Cette section définit les styles pour les liens de la page */
 li a {
-  color:black;
-  font-size:20px;
+  color: black; /* couleur du texte */
+  font-size: 20px; /* taille de police */
 }
 
-.sub-menu{
-  display:none;
-  position:absolute;
-  width:100px;
-}
-
-.sub-menu li{
-  display:block;
-}
-
-.sub-menu:hover{
-  font-weight:bold;
-  color:black;
-}
-
-header li{
-  position:relative;
-  vertical-align:top;
-}
-
-header li:hover .sub-menu{
-  display:block;
-}
-
-/*BANNIERE*/
-#logo{
-  flex:2 1 40rem;
-  margin-left:25px;
-}
-
-.search{
-  display:flex;
-  align-items:center;
-  margin-right:10px;
-}
-
-.search input{
-  width:300px;
-  border: 2px solid black;
-  padding:10px;
-  border-radius:30px;
-}
-
-.search i{
-  position:absolute;
-  margin-left:270px;
-}
+/* Cette section définit les styles pour les sous-menus déroulants de la barre de navigation */
+.sub-menu {
+  display: none; /* masquage des sous-menus */
+  position: absolute; /* position absolue pour le positionnement des sous-menus
 
